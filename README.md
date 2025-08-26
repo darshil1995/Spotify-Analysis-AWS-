@@ -8,7 +8,7 @@ This project demonstrates building an **end-to-end data engineering pipeline** u
 ---
 
 ## 🏗️ Architecture
-![Architecture Diagram](src/architecture.png)
+![Architecture Diagram](src/Architecture.png)
 
 1. **Producer Application** (Python, running on AWS EC2)  
    - Reads data from Spotify CSVs (Tracks, Albums, Artists).  
