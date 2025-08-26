@@ -73,67 +73,66 @@ Source: [Spotify Dataset (Kaggle)](https://www.kaggle.com/datasets/tonygordonjr/
   ```bash
   sudo yum update
   sudo yum install python3-pip -y
-  pip install pandas kafka-python boto3
-````
-
-* Transferred local producer/consumer code via `scp`.
-* Ran apps to stream data to Kafka and load into S3.
+  pip install pandas kafka-python boto3```
+  
+- Transferred local producer/consumer code via `scp`.
+- Ran apps to stream data to Kafka and load into S3.
 
 ### 4. AWS S3 Buckets
 
-* **Staging Layer (Raw Data)** – receives data directly from consumers.
-* **Data Lake (Processed Data)** – stores transformed parquet files.
+- **Staging Layer (Raw Data)** – receives data directly from consumers.
+- **Data Lake (Processed Data)** – stores transformed parquet files.
 
 ### 5. AWS Glue ETL
 
-* Built Glue Visual ETL jobs to:
+- Built Glue Visual ETL jobs to:
 
-  * Merge Tracks, Artists, Albums.
-  * Remove duplicate/unnecessary columns.
-  * Partition data by ingestion date.
-  * Save as Parquet in Data Lake.
+  - Merge Tracks, Artists, Albums.
+  - Remove duplicate/unnecessary columns.
+  - Partition data by ingestion date.
+  - Save as Parquet in Data Lake.
 
 ### 6. AWS Glue Crawler
 
-* Crawled Data Lake.
-* Created database and tables in Glue Data Catalog.
+- Crawled Data Lake.
+- Created database and tables in Glue Data Catalog.
 
 ### 7. AWS Athena
 
-* Queried data lake tables with SQL.
-* Verified schema correctness and data quality.
+- Queried data lake tables with SQL.
+- Verified schema correctness and data quality.
 
 ### 8. Power BI Integration
 
-* Connected Power BI to Athena using ODBC.
-* Fixed **access denied error** by:
+- Connected Power BI to Athena using ODBC.
+- Fixed **access denied error** by:
 
-  * Creating dedicated S3 Athena query results folder (`athena-query-results/`).
-  * Updating IAM permissions for Athena.
-  * Re-configuring ODBC DSN in Power BI.
+  - Creating dedicated S3 Athena query results folder (`athena-query-results/`).
+  - Updating IAM permissions for Athena.
+  - Re-configuring ODBC DSN in Power BI.
 
 ---
 
 ## 🛠️ Tech Stack
 
-* **Streaming**: Apache Kafka (Redpanda Cloud)
-* **Compute**: AWS EC2
-* **Storage**: AWS S3 (Staging + Data Lake)
-* **ETL**: AWS Glue (Jobs + Crawlers)
-* **Query Engine**: AWS Athena
-* **Monitoring**: AWS CloudWatch
-* **Visualization**: Power BI
+- **Streaming**: Apache Kafka (Redpanda Cloud)
+- **Compute**: AWS EC2
+- **Storage**: AWS S3 (Staging + Data Lake)
+- **ETL**: AWS Glue (Jobs + Crawlers)
+- **Query Engine**: AWS Athena
+- **Monitoring**: AWS CloudWatch
+- **Visualization**: Power BI
 
 ---
 
 ## ✅ Key Learnings
 
-* How to set up and use **Kafka topics & partitions** with Redpanda.
-* Best practices for **producer-consumer applications** with AWS EC2.
-* Designing a **multi-zone data lake (Raw + Processed)** in S3.
-* Automating transformations with **Glue ETL** and schema discovery with **Glue Crawlers**.
-* Optimizing queries using **Athena + Parquet**.
-* Troubleshooting and configuring **Power BI → Athena ODBC integration**.
+- How to set up and use **Kafka topics & partitions** with Redpanda.
+- Best practices for **producer-consumer applications** with AWS EC2.
+- Designing a **multi-zone data lake (Raw + Processed)** in S3.
+- Automating transformations with **Glue ETL** and schema discovery with **Glue Crawlers**.
+- Optimizing queries using **Athena + Parquet**.
+- Troubleshooting and configuring **Power BI → Athena ODBC integration**.
 
 ---
 
