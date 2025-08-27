@@ -2,16 +2,17 @@ import pandas as pd
 from kafka import KafkaProducer
 import json
 import boto3, json
+from config import get_kafka_secret
 
-client = boto3.client("secretsmanager", region_name="us-east-1")
-secret = json.loads(client.get_secret_value(SecretId="kafka/producer")["SecretString"])
+# Load secret once
+secret = get_kafka_secret()
 
 producer = KafkaProducer(
-    bootstrap_servers="d2m7vo4hu0bcm3tve3sg.any.us-east-1.mpx.prd.cloud.redpanda.com:9092",
+  bootstrap_servers="d2m7vo4hu0bcm3tve3sg.any.us-east-1.mpx.prd.cloud.redpanda.com:9092",
   security_protocol="SASL_SSL",
   sasl_mechanism="SCRAM-SHA-256",
   sasl_plain_username=secret["username"],
-    sasl_plain_password=secret["password"],
+  sasl_plain_password=secret["password"],
   value_serializer=lambda v: json.dumps(v).encode('utf-8')
 )
 

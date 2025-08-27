@@ -3,6 +3,10 @@ import json
 import boto3
 from io import StringIO
 from kafka import KafkaConsumer
+from config import get_kafka_secret
+
+# Load secret once
+secret = get_kafka_secret()
 
 # -----------------------------
 # Configuration
@@ -17,8 +21,8 @@ consumer = KafkaConsumer(
     bootstrap_servers="d2m7vo4hu0bcm3tve3sg.any.us-east-1.mpx.prd.cloud.redpanda.com:9092",
     security_protocol="SASL_SSL",
     sasl_mechanism="SCRAM-SHA-256",
-    sasl_plain_username="darshilshah",
-    sasl_plain_password="4a4HL3lMWY202piQVhBjiIneE3x7U4",
+    sasl_plain_username=secret["username"],
+    sasl_plain_password=secret["password"],
     auto_offset_reset="earliest",  # start from earliest if no committed offset
     enable_auto_commit=True,       # commit offsets automatically
     group_id="tracks-consumer-group",   #persist offsets under this group
